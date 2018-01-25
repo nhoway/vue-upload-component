@@ -13,13 +13,13 @@
 <script>
 export default {
   methods: {
-    change(e) {
+    change (e) {
       this.$destroy()
       this.$parent.addInputFile(e.target)
       // eslint-disable-next-line
       new this.constructor({
         parent: this.$parent,
-        el: this.$el,
+        el: this.$el
       })
     }
   }

@@ -33,6 +33,7 @@
 }
 </style>
 <script>
+/* eslint-disable */
 import InputFile from './InputFile.vue'
 export default {
   components: {
@@ -156,6 +157,7 @@ export default {
     // html5 特征
     if (window.FormData && input.files) {
       // 上传目录特征
+      console.log("---------- HTML5 INPUT INITIALISED ----------")
       if (typeof input.webkitdirectory === 'boolean' || typeof input.directory === 'boolean') {
         this.features.directory = true
       }
@@ -525,6 +527,16 @@ export default {
           })
         } else if (entry.isDirectory && this.dropDirectory) {
           let files = []
+          if (entry.fullPath) {
+            resolve([
+              {
+                size: 0,
+                name: entry.name,
+                path: path + entry.name,
+                type: "folder"
+              }
+            ])
+          }
           let dirReader = entry.createReader()
           let readEntries = () => {
             dirReader.readEntries((entries) => {
