@@ -157,7 +157,6 @@ export default {
     // html5 特征
     if (window.FormData && input.files) {
       // 上传目录特征
-      console.log("---------- HTML5 INPUT INITIALISED ----------")
       if (typeof input.webkitdirectory === 'boolean' || typeof input.directory === 'boolean') {
         this.features.directory = true
       }
@@ -516,26 +515,22 @@ export default {
       return new Promise((resolve, reject) => {
         if (entry.isFile) {
           entry.file(function (file) {
-            resolve([
-              {
+            resolve([{
                 size: file.size,
                 name: path + file.name,
                 type: file.type,
                 file,
-              }
-            ])
+              }])
           })
         } else if (entry.isDirectory && this.dropDirectory) {
           let files = []
           if (entry.fullPath) {
-            resolve([
-              {
+            files.push({
                 size: 0,
-                name: entry.name,
+                name: path + entry.name,
                 path: path + entry.name,
                 type: "folder"
-              }
-            ])
+              })
           }
           let dirReader = entry.createReader()
           let readEntries = () => {
