@@ -528,6 +528,7 @@ export default {
             files.push({
                 size: 0,
                 name: path + entry.name,
+                path: path + entry.name,
                 type: "folder"
               })
           }
